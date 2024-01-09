@@ -28,19 +28,19 @@ public class bbdd {
 
 	/*
 	
-	private static void novaCompra(Connection con) {
+	private static void novaCompra(Connection con, String sql) {
 	
 	}
 	
-	private static void devolucioCompra(Connection con) {
+	private static void devolucioCompra(Connection con, String sql) {
 	
 	}
 	
-	private static void costultarPunts(Connection con) {
+	private static void costultarPunts(Connection con, String sql) {
 	
 	}
 	
-	private static void costultarHistorial(Connection con) {
+	private static void costultarHistorial(Connection con, String sql) {
 	
 	}
 	
