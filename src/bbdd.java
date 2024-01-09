@@ -27,6 +27,32 @@ public class bbdd {
 	}
 
 	/*
+	
+	private static void novaCompra(Connection con) {
+	
+	}
+	
+	private static void devolucioCompra(Connection con) {
+	
+	}
+	
+	private static void costultarPunts(Connection con) {
+	
+	}
+	
+	private static void costultarHistorial(Connection con) {
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	private static void select(Connection con) {
 		String sql = "SELECT p.* FROM PERSONA p";
 
