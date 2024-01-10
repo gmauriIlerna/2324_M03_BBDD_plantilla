@@ -26,37 +26,32 @@ public class bbdd {
 		return con;
 	}
 
-	/*
 	
 	private static void novaCompra(Connection con, String sql) {
-	
+		try {
+			Statement st = con.createStatement();
+			st.execute(sql);
+			
+			System.out.println("Compra registrada correctamente");
+		} catch (SQLException e) {
+			System.out.println("Ha habido un error en el Insert " + e);
+		}
 	}
 	
 	private static void devolucioCompra(Connection con, String sql) {
-	
-	}
-	
-	private static void costultarPunts(Connection con, String sql) {
-	
-	}
-	
-	private static void costultarHistorial(Connection con, String sql) {
-	
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	private static void select(Connection con) {
-		String sql = "SELECT p.* FROM PERSONA p";
-
 		try {
+			Statement st = con.createStatement();
+			st.execute(sql);
+			
+			System.out.println("Compra devuelta correctamente");
+		} catch (SQLException e) {
+			System.out.println("Ha habido un error en el Insert " + e);
+		}
+	}
+	
+	/*
+	private static void costultarPunts(Connection con, String sql) {
+	try {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 
@@ -65,14 +60,29 @@ public class bbdd {
 					String dni = rs.getString("DNI");
 					String nombre = rs.getString("NOMBRE");
 
-					Struct domicilio = (Struct) rs.getObject("DOMICILIO");
-					Object[] valoresDireccion = domicilio.getAttributes();
-					String calle = (String) valoresDireccion[0];
-					String ciudad = (String) valoresDireccion[1];
-					String pais = (String) valoresDireccion[2];
+					System.out.println(persona.toString());
 
-					Direccion direccion = new Direccion(calle, ciudad, pais);
-					Persona persona = new Persona(dni, nombre, direccion);
+				}
+			} else {
+				System.out.println("No he encontrado nada");
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private static void costultarHistorial(Connection con, String sql) {
+	try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+
+			if (rs.isBeforeFirst()) {
+				while (rs.next()) {
+					String dni = rs.getString("DNI");
+					String nombre = rs.getString("NOMBRE");
+
 
 					System.out.println(persona.toString());
 
@@ -81,46 +91,10 @@ public class bbdd {
 				System.out.println("No he encontrado nada");
 			}
 			
-			
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	private static void insertarPersona(Connection con) {
-		Scanner scanner = new Scanner(System.in);
-		
-		System.out.println("Introduce tu DNI");
-		String dni = scanner.nextLine();
-		
-		System.out.println("Introduce tu nombre");
-		String nombre = scanner.nextLine();
-		
-		System.out.println("Introduce tu calle");
-		String calle = scanner.nextLine();
-		
-		System.out.println("Introduce tu ciudad");
-		String ciudad = scanner.nextLine();
-		
-		System.out.println("Introduce tu pais");
-		String pais = scanner.nextLine();
-	
-		String sql = "INSERT INTO PERSONA VALUES('" + dni + "', '" + nombre +
-				"', DIRECCION('" + calle + "', '" + ciudad + "', '" + pais + "'))";
-		
-		try {
-			Statement st = con.createStatement();
-			st.execute(sql);
-			
-			System.out.println("Persona registrada correctamente");
-		} catch (SQLException e) {
-			System.out.println("Ha habido un error en el Insert " + e);
-		}
-		
-		scanner.close();
-		
-
-	}*/
+*/
 }
