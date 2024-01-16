@@ -60,28 +60,56 @@ public class bbdd {
 		}
 	}
 	
-	private static void select(Connection con, String sql) {
+	private static String[] select(Connection con, String sql, String[] listaElementosSeleccionados) {
 		try {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 
+
 			if (rs.isBeforeFirst()) {
+				String[] arrayS = new String[listaElementosSeleccionados.length];
 				while (rs.next()) {
-					String dni = rs.getString("DNI");
-					String nombre = rs.getString("NOMBRE");
-
-					System.out.println(persona.toString());
-
+					for (int i = 0; i < listaElementosSeleccionados.length; i++) {
+						arrayS[i] = rs.getString(listaElementosSeleccionados[i]);
+					}
 				}
+				return arrayS;
 			} else {
-				System.out.println("No he encontrado nada");
+				System.out.println("No se ha encontrado nada");
+				
 			}
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return new String[0];
 		}
+		
+		System.out.println("Unexpected error");
+		return new String[0];
 	}
+	
+	private static void print(Connection con, String sql, String[] listaElementosSeleccionados) {
+		try {
+				Statement st = con.createStatement();
+				ResultSet rs = st.executeQuery(sql);
+
+				if (rs.isBeforeFirst()) {
+					while (rs.next()) {
+						for (int i = 0; i < listaElementosSeleccionados.length; i++) {
+							System.out.println(listaElementosSeleccionados[i] + 
+									": " + rs.getString(listaElementosSeleccionados[i]));
+						}
+					}
+				} else {
+					System.out.println("No se ha encontrado nada");
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	
 	/*
 	private static void selectPersona(Connection con, String sql) {
