@@ -27,31 +27,41 @@ public class bbdd {
 	}
 
 	
-	private static void novaCompra(Connection con, String sql) {
+	private static void insert(Connection con, String sql) {
 		try {
 			Statement st = con.createStatement();
 			st.execute(sql);
 			
-			System.out.println("Compra registrada correctamente");
+			System.out.println("Insert hecho correctamente");
 		} catch (SQLException e) {
 			System.out.println("Ha habido un error en el Insert " + e);
 		}
 	}
 	
-	private static void devolucioCompra(Connection con, String sql) {
+	private static void update(Connection con, String sql) {
 		try {
 			Statement st = con.createStatement();
 			st.execute(sql);
 			
-			System.out.println("Compra devuelta correctamente");
+			System.out.println("Update hecho correctamente");
 		} catch (SQLException e) {
-			System.out.println("Ha habido un error en el Insert " + e);
+			System.out.println("Ha habido un error en el Update " + e);
 		}
 	}
 	
-	/*
-	private static void costultarPunts(Connection con, String sql) {
-	try {
+	private static void delete(Connection con, String sql) {
+		try {
+			Statement st = con.createStatement();
+			st.execute(sql);
+			
+			System.out.println("Delete hecho correctamente");
+		} catch (SQLException e) {
+			System.out.println("Ha habido un error en el Delete " + e);
+		}
+	}
+	
+	private static void select(Connection con, String sql) {
+		try {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 
@@ -73,7 +83,8 @@ public class bbdd {
 		}
 	}
 	
-	private static void costultarHistorial(Connection con, String sql) {
+	/*
+	private static void selectPersona(Connection con, String sql) {
 	try {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
@@ -83,14 +94,13 @@ public class bbdd {
 					String dni = rs.getString("DNI");
 					String nombre = rs.getString("NOMBRE");
 
-
 					System.out.println(persona.toString());
 
 				}
 			} else {
 				System.out.println("No he encontrado nada");
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
