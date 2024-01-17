@@ -95,7 +95,7 @@ public class bbdd {
      *
      * @param con                         Objeto Connection que representa la conexión a la base de datos.
      * @param sql                         Sentencia SQL de consulta.
-     * @param listaElementosSeleccionados Array de Strings con los nombres de lal columnas seleccionadas.
+     * @param listaElementosSeleccionados Array de Strings con los nombres de las columnas seleccionadas.
      * @return Array de Strings con los resultados de la consulta donde cada posición es el contenido de la columna correspondiente
      */
 	public static String[] select(Connection con, String sql, String[] listaElementosSeleccionados) {
