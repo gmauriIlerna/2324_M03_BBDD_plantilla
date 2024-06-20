@@ -1,14 +1,12 @@
 import java.sql.*;
+import java.util.Scanner;
 
 
 /**
  * Clase que proporciona métodos para interactuar con una base de datos Oracle.
  */
 public class bbdd {
-	private static final String USER = "vuestroUsuario";
-	private static final String PWD = "vuestraContraseña";
-	// Si estáis desde casa, la url será oracle.ilerna.com y no 192.168.3.26
-	private static final String URL = "jdbc:oracle:thin:@192.168.3.26:1521:xe";
+
 
 
     /**
@@ -22,7 +20,29 @@ public class bbdd {
 		Connection con = null;
 
 		System.out.println("Intentando conectarse a la base de datos");
-
+		
+		System.out.println("Selecciona centro o fuera de centro: (CENTRO/FUERA)");
+		
+		Scanner scan = new Scanner(System.in);
+		
+		String s = scan.nextLine();
+		
+		s = s.toLowerCase();
+		
+		String URL;
+		
+		if(s.equals("centro")) {
+			URL = "jdbc:oracle:thin:@192.168.3.26:1521:xe";
+		} else {
+			URL = "jdbc:oracle:thin:@oracle.ilerna.com:1521:xe";
+		}
+		
+		System.out.println("¿Usuario?");
+		String USER = scan.nextLine();
+		
+		System.out.println("¿Contraseña?");
+		String PWD = scan.nextLine();
+		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			con = DriverManager.getConnection(URL, USER, PWD);
@@ -89,42 +109,25 @@ public class bbdd {
 	}
 	
     /**
-     * Realiza una consulta en la base de datos y devuelve los resultados como un array de Strings.
-     * ADVERTENCIA, SOLO PODEIS BUSCAR RESULTADOS DE UNA SOLA FILA, SI SE ENCUENTRA MÁS DE UNA FILA
-     * PUEDE DAR RESULTADOS EXTRAÑOS.
+     * Realiza una consulta en la base de datos y devuelve los resultados como un ResultSet
      *
      * @param con                         Objeto Connection que representa la conexión a la base de datos.
      * @param sql                         Sentencia SQL de consulta.
      * @param listaElementosSeleccionados Array de Strings con los nombres de las columnas seleccionadas.
-     * @return Array de Strings con los resultados de la consulta donde cada posición es el contenido de la columna correspondiente
+     * @return ResultSet con la query hecha
      */
-	public static String[] select(Connection con, String sql, String[] listaElementosSeleccionados) {
+	public static ResultSet select(Connection con, String sql) {
 		try {
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
-
-
-			if (rs.isBeforeFirst()) {
-				String[] arrayS = new String[listaElementosSeleccionados.length];
-				while (rs.next()) {
-					for (int i = 0; i < listaElementosSeleccionados.length; i++) {
-						arrayS[i] = rs.getString(listaElementosSeleccionados[i]);
-					}
-				}
-				return arrayS;
-			} else {
-				System.out.println("No se ha encontrado nada");
-				
-			}
+			return st.executeQuery(sql);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return new String[0];
 		}
 		
 		System.out.println("Unexpected error");
-		return new String[0];
+		return null;
 	}
 	
     /**
@@ -133,7 +136,7 @@ public class bbdd {
      *
      * @param con                         Objeto Connection que representa la conexión a la base de datos.
      * @param sql                         Sentencia SQL de consulta.
-     * @param listaElementosSeleccionados Array de Strings con los nombres de los elementos seleccionados.
+     * @param listaElementosSeleccionados Array de Strings con los nombres de las columnas seleccionadas.
      */
 	public static void print(Connection con, String sql, String[] listaElementosSeleccionados) {
 		try {
