@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Guillem Mauri/Documents/GitHub/2324_M03_BBDD_plantilla/ojdbc8.jar"/>
-	<classpathentry kind="output" path="bin"/>
-</classpath>
